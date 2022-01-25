@@ -1,0 +1,1 @@
+{"version":3,"file":"static/css/main.cce8114b.css","mappings":"AAAA,gBAII,QAAS,CAHT,eAAgB,CAEhB,SAAU,CADV,UAGJ","sources":["index.css"],"sourcesContent":["html, body,#root {\n    min-height: 100%;\n    width: 100%;\n    padding: 0;\n    margin: 0;\n}"],"names":[],"sourceRoot":""}

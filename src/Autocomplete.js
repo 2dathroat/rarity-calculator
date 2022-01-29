@@ -4,5 +4,4 @@ export const traits = Array.from(new Set([
     'Clothes','Body Color','Outfit','Weapon','Hair',
     'Neckless', 'Ring', 'Neck', 'Nose', 'Skin feature',
     'Fur', 'Hat', 'Eye color', 'Jewelry', 'Helmet', 'Eyewear', 'Face',
-    'None'
 ]).values());

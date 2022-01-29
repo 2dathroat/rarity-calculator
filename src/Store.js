@@ -1,4 +1,4 @@
-import {makeAutoObservable} from "mobx";
+import {makeAutoObservable, toJS} from "mobx";
 import {v4} from 'uuid';
 
 const DEFAULT_COLLECTION_SIZE = 10000;
@@ -75,4 +75,19 @@ export class Store {
     ) * 100;
 
     findVariant = (traitId, variantId) => this.findTrait(traitId).variants.find(({id}) => id === variantId);
+
+    toJSON = () => {
+        const json = toJS(this);
+        json.traits = json.traits.map(trait => {
+            trait.variants = trait.variants.map(variant => {
+                if (variant.type === 'None' || variant.type === 'none' || variant.type === 'null') {
+                    variant.type = null;
+                }
+                return variant;
+            });
+            return trait;
+        });
+
+        return json;
+    }
 }

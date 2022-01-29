@@ -26,7 +26,7 @@ export const CollectionSummary = observer(() => {
                     configuration is {store.maxSize}.</Typography>
 
                 <Button variant="outlined" sx={{mt: '25px'}}>
-                    <a href={`data:plain/text,${JSON.stringify(toJS(store))}`} download="data.json">
+                    <a href={`data:plain/text,${JSON.stringify(store)}`} download="data.json">
                         Download configuration
                     </a>
                 </Button>

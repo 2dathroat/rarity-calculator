@@ -29,8 +29,11 @@ export const Characters = observer(() => {
                                            sx={{mr: '10px'}}
                                            onChange={(e) => store.renameCharacter(character.id, e.target.value)}/>
                                 <TextField id="standard-basic" label="Weight" value={character.weight} type="number"
-                                           InputProps={{inputProps: {min: 0, max: 100}}}
+                                           InputProps={{inputProps: {min: 0, max: 100}}} sx={{mr: '10px'}}
                                            onChange={(e) => store.changeCharacterWeight(character.id, e.target.value)}/>
+                                <TextField id="standard-basic" label="zIndex" value={character.zIndex} type="number"
+                                           InputProps={{inputProps: {min: 0, max: 100}}}
+                                           onChange={(e) => store.changeCharacterZIndex(character.id, e.target.value)}/>
                             </>
                         ) : (
                             <ListItemText>

@@ -42,9 +42,9 @@ const App = observer(() => {
                         }
                     />
                     <Characters/>
-                    <UpsertItemDialog label="Character name" hasWeight={true}
+                    <UpsertItemDialog label="Character name" title="Add new character"
                                       onSave={store.addCharacter} open={shouldShowAddCharDialog}
-                                      title="Add new character"
+                                      hasWeight={true} hasZIndex={true}
                                       handleClose={() => setShouldShowAddCharDialog(false)}/>
                 </Card>
 
@@ -73,7 +73,7 @@ const App = observer(() => {
                             </Accordion>)
                     }
 
-                    <UpsertItemDialog label="Trait type" hasWeight={false}
+                    <UpsertItemDialog label="Trait type" hasWeight={false} hasZIndex={true}
                                       onSave={store.addTrait} open={shouldShowAddTraitDialog}
                                       title="Add new trait" autoCompleteStore={traitsAutoComplete}
                                       handleClose={() => setShouldShowAddTraitDialog(false)}/>

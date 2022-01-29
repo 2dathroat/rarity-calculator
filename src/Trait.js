@@ -15,13 +15,13 @@ import Grid from "@mui/material/Grid";
 import {Typography} from "@mui/material";
 import Alert from "@mui/material/Alert";
 
-export const Trait = observer(({type, id, variants}) => {
+export const Trait = observer(({type, id, variants, zIndex}) => {
     const store = React.useContext(StoreContext);
     const [showShowAddVariantDialog, setShowShowAddVariantDialog] = React.useState(false);
     const [showShowEditDialog, setShowShowEditDialog] = React.useState(false);
 
-    const changeType = (nextType) => store.changeTraitType(id, nextType);
-    const addVariant = (value, weight) => store.addVariant(id, value, weight);
+    const updateTrait = (nextData) => store.updateTrait(id, nextData);
+    const addVariant = (variant) => store.addVariant(id, variant);
 
     return (
         <Box>
@@ -44,15 +44,16 @@ export const Trait = observer(({type, id, variants}) => {
 
             <Divider/>
 
-            <Typography variant="h6" sx={{mt: '15px'}}>Variants{variants.length > 0 && ` (${variants.length})`}</Typography>
+            <Typography variant="h6"
+                        sx={{mt: '15px'}}>Variants{variants.length > 0 && ` (${variants.length})`}</Typography>
 
             {variants.length === 0 && (<Alert severity="warning">This trait doesn't have any variants yet.</Alert>)}
 
             <Variants variants={variants} traitId={id}/>
 
-            <UpsertItemDialog label="Trait type" hasWeight={false} onSave={changeType}
-                              initialValue={type} open={showShowEditDialog}
-                              title="Edit trait" isInEditMode={true}
+            <UpsertItemDialog label="Trait type" hasWeight={false} onSave={updateTrait}
+                              initialValue={type} open={showShowEditDialog} initialZIndex={zIndex}
+                              title="Edit trait" isInEditMode={true} hasZIndex={true}
                               handleClose={() => setShowShowEditDialog(false)}/>
             <UpsertItemDialog label="Variant type" hasWeight={true}
                               onSave={addVariant} open={showShowAddVariantDialog}

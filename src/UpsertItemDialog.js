@@ -18,9 +18,11 @@ import Autocomplete from '@mui/material/Autocomplete';
 
 export const UpsertItemDialog = observer(({
                                               onSave, label, open, handleClose, hasWeight, initialValue,
-                                              initialWeight, title, isInEditMode, autoCompleteStore
+                                              initialWeight, title, isInEditMode, autoCompleteStore,
+                                              hasZIndex, initialZIndex
                                           }) => {
     const [weight, setWeight] = React.useState(initialWeight || 1);
+    const [zIndex, setZIndex] = React.useState(initialZIndex || 1);
     const [value, setValue] = React.useState(initialValue || '');
     const [shouldCloseDialogAfterSave, setShouldCloseDialogAfterSave] = React.useState(true);
     const [isPopperOpen, setIsPopperOpen] = React.useState(false);
@@ -33,12 +35,17 @@ export const UpsertItemDialog = observer(({
         setWeight(initialWeight || 1);
     }, [initialWeight])
 
+    React.useEffect(() => {
+        setZIndex(initialZIndex || 1);
+    }, [initialZIndex])
+
     const anchorRef = React.useRef(null);
 
     const _onSave = () => {
-        onSave(value, weight);
-        setWeight(1);
-        setValue('');
+        onSave({value, weight, zIndex});
+        setWeight(initialWeight || 1);
+        setZIndex(initialZIndex || 1);
+        setValue(initialValue || '');
         if (shouldCloseDialogAfterSave) {
             handleClose();
         }
@@ -59,10 +66,7 @@ export const UpsertItemDialog = observer(({
         setIsPopperOpen(false);
     }
 
-    const a = (...a) => {
-        console.log(a);
-
-    }
+    const xs = 12 - (hasWeight ? 3 : 0) - (hasZIndex ? 3 : 0);
 
     return (
         <Dialog open={open} handleClose={handleClose}>
@@ -72,7 +76,7 @@ export const UpsertItemDialog = observer(({
                 </Typography>)}
 
                 <Grid container sx={{mt: '25px'}}>
-                    <Grid item xs={hasWeight ? 9 : 12}>
+                    <Grid item xs={xs}>
                         <Autocomplete
                             freeSolo options={autoCompleteStore || []}
                             defaultValue={value}
@@ -92,6 +96,15 @@ export const UpsertItemDialog = observer(({
                                        sx={{ml: '10px', minWidth: '80px'}}
                                        InputProps={{inputProps: {min: 0, max: 100}}}
                                        onChange={(e) => setWeight(e.target.value)}
+                            />
+                        </Grid>
+                    )}
+                    {hasZIndex && (
+                        <Grid item xs={3}>
+                            <TextField id="standard-basic" label="zIndex" value={zIndex} type="number"
+                                       sx={{ml: '10px', minWidth: '80px'}}
+                                       InputProps={{inputProps: {min: 0, max: 100}}}
+                                       onChange={(e) => setZIndex(e.target.value)}
                             />
                         </Grid>
                     )}

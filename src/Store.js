@@ -16,11 +16,15 @@ export class Store {
         return this.characters.length * this.traits.length * this.traits.map(({variants}) => variants).flat().length;
     }
 
-    addCharacter = (name, weight) => this.characters.push({name, id: v4(), weight: parseInt(weight,10) || 1});
+    addCharacter = ({value: name, weight, zIndex}) => this.characters.push({
+        name, id: v4(), weight: parseInt(weight, 10) || 1, zIndex: parseInt(zIndex, 10) || 1
+    });
 
     renameCharacter = (id, nextName) => this.findCharacter(id).name = nextName;
 
-    changeCharacterWeight = (id, nextWeight) => this.findCharacter(id).weight = parseInt(nextWeight,10);
+    changeCharacterWeight = (id, nextWeight) => this.findCharacter(id).weight = parseInt(nextWeight, 10);
+
+    changeCharacterZIndex = (id, nextZIndex) => this.findCharacter(id).zIndex = parseInt(nextZIndex, 10);
 
     removeCharacter = (id) => this.characters = this.characters.filter((suspect) => suspect.id !== id);
 
@@ -32,20 +36,33 @@ export class Store {
 
     findCharacter = (id) => this.characters.find((suspect) => suspect.id === id);
 
-    addTrait = (type) => this.traits.push({type, id: v4(), variants: []})
+    addTrait = ({value: type, zIndex}) => this.traits.push({
+        type,
+        id: v4(),
+        variants: [],
+        zIndex: parseInt(zIndex, 10) || 1
+    })
 
-    changeTraitType = (id, nextType) => this.findTrait(id).type = nextType;
+    updateTrait = (id, nextData) => {
+        const trait = this.findTrait(id);
+        trait.zIndex = nextData.zIndex;
+        trait.type = nextData.value;
+    }
 
     removeTrait = (id) => this.traits = this.traits.filter((suspect) => suspect.id !== id);
 
     findTrait = (id) => this.traits.find((suspect) => suspect.id === id);
 
-    addVariant = (id, type, weight) => this.findTrait(id).variants.push({id: v4(), type, weight: parseInt(weight,10) || 1});
+    addVariant = (id, {value, weight}) => this.findTrait(id).variants.push({
+        id: v4(),
+        type: value,
+        weight: parseInt(weight, 10) || 1
+    });
 
     changeVariantType = (traitId, variantId, nextType) => this.findVariant(traitId, variantId).type = nextType;
 
     changeVariantWeight = (traitId, variantId, nextWeight) =>
-        this.findVariant(traitId, variantId).weight = parseInt(nextWeight,10);
+        this.findVariant(traitId, variantId).weight = parseInt(nextWeight, 10);
 
     removeVariant = (traitId, variantId) => {
         const trait = this.findTrait(traitId);

@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/rarity-calculator/static/css/main.cce8114b.css",
-    "main.js": "/rarity-calculator/static/js/main.8699d3c8.js",
+    "main.js": "/rarity-calculator/static/js/main.d1c08ed1.js",
     "static/js/787.5306883d.chunk.js": "/rarity-calculator/static/js/787.5306883d.chunk.js",
     "index.html": "/rarity-calculator/index.html",
     "main.cce8114b.css.map": "/rarity-calculator/static/css/main.cce8114b.css.map",
-    "main.8699d3c8.js.map": "/rarity-calculator/static/js/main.8699d3c8.js.map",
+    "main.d1c08ed1.js.map": "/rarity-calculator/static/js/main.d1c08ed1.js.map",
     "787.5306883d.chunk.js.map": "/rarity-calculator/static/js/787.5306883d.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.cce8114b.css",
-    "static/js/main.8699d3c8.js"
+    "static/js/main.d1c08ed1.js"
   ]
 }
